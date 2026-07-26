@@ -1,0 +1,348 @@
+Origin,Destination,Travel_Time,Travel_Minutes,Status,Timestamp
+"3081HS, Rotterdam",Zwartewaal,56m,56,ok,2026-07-26T00:23:27.273072
+"3081HS, Rotterdam",Marum,4h 19m,259,ok,2026-07-26T00:23:44.162500
+"3081HS, Rotterdam",Hoedekenskerke,2h 8m,128,ok,2026-07-26T00:24:01.491840
+"3081HS, Rotterdam",Sint Kruis,4h 48m,288,ok,2026-07-26T00:24:18.670996
+"3081HS, Rotterdam",Wageningen,1h 38m,98,ok,2026-07-26T00:24:35.898573
+"3081HS, Rotterdam",Leende,2h 17m,137,ok,2026-07-26T00:24:52.929851
+"3081HS, Rotterdam",Maasland,1h 8m,68,ok,2026-07-26T00:25:10.049190
+"3081HS, Rotterdam",Oost-Souburg,1h 56m,116,ok,2026-07-26T00:25:27.343194
+"3081HS, Rotterdam",Bloemendaal,1h 40m,100,ok,2026-07-26T00:25:44.552986
+"3081HS, Rotterdam",Texel,1h 25m,85,ok,2026-07-26T00:26:01.525125
+"3081HS, Rotterdam",Meierijstad,2h 3m,123,ok,2026-07-26T00:26:18.739818
+"3081HS, Rotterdam",Veenhuizen,3h 42m,222,ok,2026-07-26T00:26:35.923417
+"3081HS, Rotterdam",Leiden,1h 5m,65,ok,2026-07-26T00:26:52.946165
+"3081HS, Rotterdam",Uithoorn,1h 39m,99,ok,2026-07-26T00:27:10.026594
+"3081HS, Rotterdam",Rhoon,20m,20,ok,2026-07-26T00:27:26.966373
+"3081HS, Rotterdam",Asten,2h 21m,141,ok,2026-07-26T00:27:43.910273
+"3081HS, Rotterdam",Eelde,3h 39m,219,ok,2026-07-26T00:28:00.861816
+"3081HS, Rotterdam",Susteren,2h 33m,153,ok,2026-07-26T00:28:17.933224
+"3081HS, Rotterdam",Gemert,2h 24m,144,ok,2026-07-26T00:28:34.923751
+"3081HS, Rotterdam",Uithuizen,3h 50m,230,ok,2026-07-26T00:28:52.059412
+"3081HS, Rotterdam",Wormerveer,1h 43m,103,ok,2026-07-26T00:29:09.247567
+"3081HS, Rotterdam",Sint-Michielsgestel,2h 13m,133,ok,2026-07-26T00:29:26.838030
+"3081HS, Rotterdam",Vlijmen,1h 51m,111,ok,2026-07-26T00:29:43.880471
+"3081HS, Rotterdam",Heerlen,2h 55m,175,ok,2026-07-26T00:30:00.903162
+"3081HS, Rotterdam",Rozenburg,1h 3m,63,ok,2026-07-26T00:30:18.060083
+"3081HS, Rotterdam",Epe,2h 37m,157,ok,2026-07-26T00:30:35.044710
+"3081HS, Rotterdam",Naaldwijk,1h 11m,71,ok,2026-07-26T00:30:52.224724
+"3081HS, Rotterdam",Haarlem,1h 27m,87,ok,2026-07-26T00:31:09.379722
+"3081HS, Rotterdam",Hellendoorn,2h 54m,174,ok,2026-07-26T00:31:26.707224
+"3081HS, Rotterdam",Waalre,2h 20m,140,ok,2026-07-26T00:31:43.829617
+"3081HS, Rotterdam",Hulst,1h 20m,80,ok,2026-07-26T00:32:00.850883
+"3081HS, Rotterdam",Purmerend,1h 39m,99,ok,2026-07-26T00:32:18.048695
+"3081HS, Rotterdam",Heerenveen,2h 52m,172,ok,2026-07-26T00:32:35.313387
+"3081HS, Rotterdam",Culemborg,1h 33m,93,ok,2026-07-26T00:32:52.559183
+"3081HS, Rotterdam",Alblasserdam,34m,34,ok,2026-07-26T00:33:09.949723
+"3081HS, Rotterdam",Muiden,1h 56m,116,ok,2026-07-26T00:33:27.032266
+"3081HS, Rotterdam",Rhenen,2h 1m,121,ok,2026-07-26T00:33:44.092123
+"3081HS, Rotterdam",Wijchen,2h 7m,127,ok,2026-07-26T00:34:01.197009
+"3081HS, Rotterdam",Oisterwijk,1h 21m,81,ok,2026-07-26T00:34:18.501315
+"3081HS, Rotterdam",Venray,2h 30m,150,ok,2026-07-26T00:34:35.583167
+"3081HS, Rotterdam",Nijmegen,1h 58m,118,ok,2026-07-26T00:34:52.759602
+"3081HS, Rotterdam",IJsselstein,1h 44m,104,ok,2026-07-26T00:35:10.103203
+"3081HS, Rotterdam",Hoogeveen,2h 44m,164,ok,2026-07-26T00:35:27.361957
+"3081HS, Rotterdam",Ridderkerk,38m,38,ok,2026-07-26T00:35:44.629714
+"3081HS, Rotterdam",Bergen,2h 18m,138,ok,2026-07-26T00:36:01.731133
+"3081HS, Rotterdam",Schiedam,36m,36,ok,2026-07-26T00:36:18.946090
+"3081HS, Rotterdam",Baarn,1h 42m,102,ok,2026-07-26T00:36:36.011207
+"3081HS, Rotterdam",Dronten,2h 15m,135,ok,2026-07-26T00:36:53.180741
+"3081HS, Rotterdam",Amstelveen,1h 20m,80,ok,2026-07-26T00:37:10.413393
+"3081HS, Rotterdam",Hoeksche Waard,45m,45,ok,2026-07-26T00:37:27.885368
+"3081HS, Rotterdam",Zwolle,2h 6m,126,ok,2026-07-26T00:37:44.969097
+"3081HS, Rotterdam",Ermelo,1h 59m,119,ok,2026-07-26T00:38:01.967284
+"3081HS, Rotterdam",Huissen,2h 23m,143,ok,2026-07-26T00:38:18.973392
+"3081HS, Rotterdam",Delfzijl,4h 8m,248,ok,2026-07-26T00:38:36.060383
+"3081HS, Rotterdam",Roermond,2h 15m,135,ok,2026-07-26T00:38:53.145316
+"3081HS, Rotterdam",Dongen,1h 29m,89,ok,2026-07-26T00:39:10.130109
+"3081HS, Rotterdam",Hardenberg,2h 44m,164,ok,2026-07-26T00:39:27.296038
+"3081HS, Rotterdam",Gorinchem,1h 6m,66,ok,2026-07-26T00:39:44.433395
+"3081HS, Rotterdam",Utrecht,1h 10m,70,ok,2026-07-26T00:40:01.475815
+"3081HS, Rotterdam",Heemskerk,1h 57m,117,ok,2026-07-26T00:40:18.584461
+"3081HS, Rotterdam",Haarlemmermeer,3h 3m,183,ok,2026-07-26T00:40:35.943205
+"3081HS, Rotterdam",Westervoort,2h 6m,126,ok,2026-07-26T00:40:53.175466
+"3081HS, Rotterdam",Amersfoort,1h 29m,89,ok,2026-07-26T00:41:10.359318
+"3081HS, Rotterdam",Capelle aan den IJssel,43m,43,ok,2026-07-26T00:41:28.125988
+"3081HS, Rotterdam",Soest,1h 36m,96,ok,2026-07-26T00:41:45.050624
+"3081HS, Rotterdam",Hellevoetsluis,1h 10m,70,ok,2026-07-26T00:42:02.389284
+"3081HS, Rotterdam",Beverwijk,1h 53m,113,ok,2026-07-26T00:42:19.530135
+"3081HS, Rotterdam",Middelburg,1h 49m,109,ok,2026-07-26T00:42:36.703014
+"3081HS, Rotterdam",Berkelland,3h 11m,191,ok,2026-07-26T00:42:53.866599
+"3081HS, Rotterdam",Groningen,3h 7m,187,ok,2026-07-26T00:43:10.994053
+"3081HS, Rotterdam",Hengelo,2h 46m,166,ok,2026-07-26T00:43:28.074417
+"3081HS, Rotterdam",Arnhem,1h 49m,109,ok,2026-07-26T00:43:45.084311
+"3081HS, Rotterdam",Helmond,1h 45m,105,ok,2026-07-26T00:44:02.133567
+"3081HS, Rotterdam",Winterswijk,3h 5m,185,ok,2026-07-26T00:44:19.326956
+"3081HS, Rotterdam",Heusden,2h 19m,139,ok,2026-07-26T00:44:36.363440
+"3081HS, Rotterdam",Krimpen aan den IJssel,56m,56,ok,2026-07-26T00:44:54.085310
+"3081HS, Rotterdam",Schagen,2h 17m,137,ok,2026-07-26T00:45:11.140796
+"3081HS, Rotterdam",Woerden,1h 7m,67,ok,2026-07-26T00:45:28.189500
+"3081HS, Rotterdam",Gouda,48m,48,ok,2026-07-26T00:45:45.147298
+"3081HS, Rotterdam",Ede,1h 43m,103,ok,2026-07-26T00:46:02.019293
+"3081HS, Rotterdam",Venlo,2h 15m,135,ok,2026-07-26T00:46:18.969338
+"3081HS, Rotterdam",Kampen,2h 23m,143,ok,2026-07-26T00:46:35.978273
+"3081HS, Rotterdam",Almere,1h 30m,90,ok,2026-07-26T00:46:52.981786
+"3081HS, Rotterdam",Steenbergen,2h 45m,165,ok,2026-07-26T00:47:10.195341
+"3081HS, Rotterdam",Elburg,1h 49m,109,ok,2026-07-26T00:47:27.170436
+"3081HS, Rotterdam",Velsen,1h 52m,112,ok,2026-07-26T00:47:44.174304
+"3081HS, Rotterdam",Nederweert,2h 33m,153,ok,2026-07-26T00:48:01.383855
+"3081HS, Rotterdam",Vught,1h 39m,99,ok,2026-07-26T00:48:18.375498
+"3081HS, Rotterdam",Eindhoven,1h 34m,94,ok,2026-07-26T00:48:35.571073
+"3081HS, Rotterdam",Zaanstad,1h 26m,86,ok,2026-07-26T00:48:52.735592
+"3081HS, Rotterdam",Delft,44m,44,ok,2026-07-26T00:49:09.714617
+"3081HS, Rotterdam",Rijswijk,49m,49,ok,2026-07-26T00:49:26.796330
+"3081HS, Rotterdam",Drimmelen,1h 49m,109,ok,2026-07-26T00:49:43.975135
+"3081HS, Rotterdam",Veendam,3h 52m,232,ok,2026-07-26T00:50:01.029711
+"3081HS, Rotterdam",Brummen,2h 28m,148,ok,2026-07-26T00:50:18.052154
+"3081HS, Rotterdam",Montfoort,2h 7m,127,ok,2026-07-26T00:50:35.204112
+"3081HS, Rotterdam",Lemmer,3h 15m,195,ok,2026-07-26T00:50:52.217072
+"3081HS, Rotterdam",Gilze en Rijen,1h 8m,68,ok,2026-07-26T00:51:09.583025
+"3081HS, Rotterdam",Alkmaar,1h 54m,114,ok,2026-07-26T00:51:26.600857
+"3081HS, Rotterdam",Waalwijk,2h 3m,123,ok,2026-07-26T00:51:43.710048
+"3081HS, Rotterdam",Harderwijk,2h 3m,123,ok,2026-07-26T00:52:00.882081
+"3081HS, Rotterdam",Hilversum,1h 27m,87,ok,2026-07-26T00:52:18.025957
+"3081HS, Rotterdam",Haren,3h 14m,194,ok,2026-07-26T00:52:34.987359
+"3081HS, Rotterdam",Brunssum,3h 26m,206,ok,2026-07-26T00:52:52.088746
+"3081HS, Rotterdam",Lelystad,1h 46m,106,ok,2026-07-26T00:53:09.161006
+"3081HS, Rotterdam",Harlingen,3h 39m,219,ok,2026-07-26T00:53:26.282652
+"3081HS, Rotterdam",Goirle,1h 43m,103,ok,2026-07-26T00:53:43.273644
+"3081HS, Rotterdam",Bergeijk,2h 32m,152,ok,2026-07-26T00:54:00.363697
+"3081HS, Rotterdam",Breda,52m,52,ok,2026-07-26T00:54:17.307951
+"3081HS, Rotterdam",Papendrecht,48m,48,ok,2026-07-26T00:54:34.517005
+"3081HS, Rotterdam",Noordwijk,3h 31m,211,ok,2026-07-26T00:54:51.653080
+"3081HS, Rotterdam",Uden,2h 20m,140,ok,2026-07-26T00:55:08.549272
+"3081HS, Rotterdam",Veenendaal,1h 53m,113,ok,2026-07-26T00:55:25.754956
+"3081HS, Rotterdam",Putten,1h 54m,114,ok,2026-07-26T00:55:42.744643
+"3081HS, Rotterdam",Zaltbommel,1h 47m,107,ok,2026-07-26T00:55:59.943958
+"3081HS, Rotterdam",Stadskanaal,3h 53m,233,ok,2026-07-26T00:56:17.189341
+"3081HS, Rotterdam",Zwijndrecht,35m,35,ok,2026-07-26T00:56:34.434893
+"3081HS, Rotterdam",Huizen,2h 7m,127,ok,2026-07-26T00:56:51.435606
+"3081HS, Rotterdam",Nunspeet,2h 11m,131,ok,2026-07-26T00:57:08.544524
+"3081HS, Rotterdam",Buren,1h 58m,118,ok,2026-07-26T00:57:25.507473
+"3081HS, Rotterdam",Ommen,2h 31m,151,ok,2026-07-26T00:57:42.470223
+"3081HS, Rotterdam",Nieuwkoop,1h 35m,95,ok,2026-07-26T00:57:59.653034
+"3081HS, Rotterdam",Aalsmeer,1h 33m,93,ok,2026-07-26T00:58:16.760397
+"3081HS, Rotterdam",Tiel,2h 1m,121,ok,2026-07-26T00:58:33.704941
+"3081HS, Rotterdam",Oss,1h 41m,101,ok,2026-07-26T00:58:50.598398
+"3081HS, Rotterdam",Deurne,1h 53m,113,ok,2026-07-26T00:59:07.569652
+"3081HS, Rotterdam",Amsterdam,1h 18m,78,ok,2026-07-26T00:59:39.047823
+"3081HS, Rotterdam",Alphen aan den Rijn,1h 15m,75,ok,2026-07-26T00:59:56.674211
+"3081HS, Rotterdam",Zeewolde,2h 24m,144,ok,2026-07-26T01:00:13.758766
+"3081HS, Rotterdam",Wijk bij Duurstede,2h 4m,124,ok,2026-07-26T01:00:48.405318
+"3081HS, Rotterdam",Roosendaal,1h 6m,66,ok,2026-07-26T01:01:05.609127
+"3081HS, Rotterdam",Heiloo,1h 50m,110,ok,2026-07-26T01:01:22.607664
+"3081HS, Rotterdam",Cuijk,3h 2m,182,ok,2026-07-26T01:01:39.581145
+"3081HS, Rotterdam",Den Haag,59m,59,ok,2026-07-26T01:03:04.420413
+"3081HS, Rotterdam",Geldrop-Mierlo,2h 1m,121,ok,2026-07-26T01:03:21.763730
+"3081HS, Rotterdam",Goes,1h 28m,88,ok,2026-07-26T01:03:38.633074
+"3081HS, Rotterdam",Laren,2h 5m,125,ok,2026-07-26T01:03:55.563031
+"3081HS, Rotterdam",Valkenswaard,2h 12m,132,ok,2026-07-26T01:04:12.797848
+"3081HS, Rotterdam",Oirschot,2h 15m,135,ok,2026-07-26T01:04:29.845087
+"3081HS, Rotterdam",Beuningen,3h 30m,210,ok,2026-07-26T01:04:46.938291
+"3081HS, Rotterdam",Leeuwarden,3h 9m,189,ok,2026-07-26T01:05:04.068655
+"3081HS, Rotterdam",Franeker,3h 30m,210,ok,2026-07-26T01:05:21.124962
+"3081HS, Rotterdam",Waddinxveen,1h 1m,61,ok,2026-07-26T01:05:38.329658
+"3081HS, Rotterdam",Barneveld,1h 51m,111,ok,2026-07-26T01:05:55.391369
+"3081HS, Rotterdam",Zevenaar,2h 4m,124,ok,2026-07-26T01:06:12.429890
+"3081HS, Rotterdam",Medemblik,2h 38m,158,ok,2026-07-26T01:06:29.521509
+"3081HS, Rotterdam",Leusden,1h 53m,113,ok,2026-07-26T01:06:46.514773
+"3081HS, Rotterdam",Apeldoorn,1h 55m,115,ok,2026-07-26T01:07:03.602593
+"3081HS, Rotterdam",Zoetermeer,58m,58,ok,2026-07-26T01:07:20.731736
+"3081HS, Rotterdam",Heeze-Leende,2h 17m,137,ok,2026-07-26T01:07:37.960365
+"3081HS, Rotterdam",Geertruidenberg,1h 43m,103,ok,2026-07-26T01:07:55.343591
+"3081HS, Rotterdam",Zeist,1h 49m,109,ok,2026-07-26T01:08:12.283164
+"3081HS, Rotterdam",Houten,1h 23m,83,ok,2026-07-26T01:08:29.229573
+"3081HS, Rotterdam",Heerde,2h 38m,158,ok,2026-07-26T01:08:46.178245
+"3081HS, Rotterdam",Aalten,2h 54m,174,ok,2026-07-26T01:09:03.136549
+"3081HS, Rotterdam",Vlaardingen,45m,45,ok,2026-07-26T01:09:20.320555
+"3081HS, Rotterdam",Weert,2h 2m,122,ok,2026-07-26T01:09:37.232863
+"3081HS, Rotterdam",Oosterhout,2h 19m,139,ok,2026-07-26T01:09:54.388155
+"3081HS, Rotterdam",Dordrecht,39m,39,ok,2026-07-26T01:10:11.497749
+"3081HS, Rotterdam",Bergen op Zoom,1h 18m,78,ok,2026-07-26T01:10:28.848574
+"3081HS, Rotterdam",Barendrecht,30m,30,ok,2026-07-26T01:10:46.069827
+"3081HS, Rotterdam",Nieuwegein,1h 38m,98,ok,2026-07-26T01:11:03.256536
+"3081HS, Rotterdam",Emmen,3h 10m,190,ok,2026-07-26T01:11:20.217690
+"3081HS, Rotterdam",Vlissingen,1h 56m,116,ok,2026-07-26T01:11:37.392396
+"3081HS, Rotterdam",Tholen,1h 26m,86,ok,2026-07-26T01:11:54.396397
+"3081HS, Rotterdam",Ameland,4h 39m,279,ok,2026-07-26T01:12:11.446019
+"3081HS, Rotterdam",Duiven,2h 10m,130,ok,2026-07-26T01:12:28.428269
+"3081HS, Rotterdam",Oldenzaal,3h 7m,187,ok,2026-07-26T01:12:45.548152
+"3081HS, Rotterdam",Enschede,2h 54m,174,ok,2026-07-26T01:13:02.625338
+"3081HS, Rotterdam",De Bilt,1h 41m,101,ok,2026-07-26T01:13:19.643384
+"3081HS, Rotterdam",Edam-Volendam,2h 26m,146,ok,2026-07-26T01:13:36.954085
+"3081HS, Rotterdam",Hilvarenbeek,1h 52m,112,ok,2026-07-26T01:13:54.214322
+"3081HS, Rotterdam",Deventer,2h 7m,127,ok,2026-07-26T01:14:11.289278
+"3081HS, Rotterdam",Etten-Leur,1h 9m,69,ok,2026-07-26T01:14:28.439041
+"3081HS, Rotterdam",Hoorn,1h 53m,113,ok,2026-07-26T01:14:45.397987
+"3081HS, Rotterdam",Bodegraven,1h 21m,81,ok,2026-07-26T01:15:02.552222
+"3081HS, Rotterdam",Oldebroek,2h 38m,158,ok,2026-07-26T01:15:19.700210
+"3081HS, Rotterdam",Sneek,3h 30m,210,ok,2026-07-26T01:15:36.676781
+"3081HS, Rotterdam",Tilburg,1h 8m,68,ok,2026-07-26T01:15:53.682654
+"3081HS, Rotterdam",Maastricht,2h 50m,170,ok,2026-07-26T01:16:10.876490
+"3081HS, Rotterdam",Meppel,2h 29m,149,ok,2026-07-26T01:16:27.911523
+"3081HS, Rotterdam",Katwijk,1h 30m,90,ok,2026-07-26T01:16:44.977567
+"3081HS, Rotterdam",Enkhuizen,2h 33m,153,ok,2026-07-26T01:17:02.109071
+"3081HS, Rotterdam",Weesp,1h 26m,86,ok,2026-07-26T01:17:19.083280
+"3081HS, Rotterdam",Lopik,1h 26m,86,ok,2026-07-26T01:17:36.048590
+"3081HS, Rotterdam",Boxtel,1h 28m,88,ok,2026-07-26T01:17:53.082599
+"3081HS, Rotterdam",Hendrik-Ido-Ambacht,36m,36,ok,2026-07-26T01:18:10.660712
+"3081HS, Rotterdam",Zundert,1h 38m,98,ok,2026-07-26T01:18:27.735520
+"3081HS, Rotterdam",Den Helder,2h 36m,156,ok,2026-07-26T01:18:44.934202
+"3081HS, Rotterdam",Castricum,1h 44m,104,ok,2026-07-26T01:19:02.052190
+"3081HS, Rotterdam",Arnemuiden,1h 46m,106,ok,2026-07-26T01:19:19.227100
+"3081HS, Rotterdam",Sliedrecht,54m,54,ok,2026-07-26T01:19:36.401553
+"3081HS, Rotterdam",Dalfsen,2h 24m,144,ok,2026-07-26T01:19:53.491840
+"3081HS, Rotterdam",Almelo,2h 34m,154,ok,2026-07-26T01:20:10.447163
+"3081HS, Rotterdam",Terneuzen,2h 35m,155,ok,2026-07-26T01:20:27.602416
+"3081HS, Rotterdam",Best,1h 35m,95,ok,2026-07-26T01:20:44.464537
+"3081HS, Rotterdam",Son en Breugel,2h 8m,128,ok,2026-07-26T01:21:18.837734
+"3081HS, Rotterdam",Maassluis,50m,50,ok,2026-07-26T01:21:35.988320
+"3081HS, Rotterdam",Leidschendam-Voorburg,48m,48,ok,2026-07-26T01:21:53.694236
+"3081HS, Rotterdam",Scherpenzeel,2h 7m,127,ok,2026-07-26T01:22:10.969798
+"3081HS, Rotterdam",Nijkerk,1h 49m,109,ok,2026-07-26T01:22:27.999360
+"3081HS, Rotterdam",Kerkrade,3h 14m,194,ok,2026-07-26T01:22:45.084181
+"3081HS, Rotterdam",Gennep,1h 34m,94,ok,2026-07-26T01:23:02.073346
+"3081HS, Rotterdam",Veldhoven,2h 8m,128,ok,2026-07-26T01:23:19.219890
+"3081HS, Rotterdam",Gemert-Bakel,2h 22m,142,ok,2026-07-26T01:23:36.483019
+"3081HS, Rotterdam",Terschelling,4h 54m,294,ok,2026-07-26T01:23:53.782820
+"3081HS, Rotterdam",Ravenstein,2h 2m,122,ok,2026-07-26T01:24:10.930601
+"3081HS, Rotterdam",Staphorst,3h 11m,191,ok,2026-07-26T01:24:28.079749
+"3081HS, Rotterdam",Doetinchem,2h 32m,152,ok,2026-07-26T01:24:45.242170
+"3081HS, Rotterdam",Diemen,1h 32m,92,ok,2026-07-26T01:25:02.255043
+"3081HS, Rotterdam",Renkum,2h 18m,138,ok,2026-07-26T01:25:19.217662
+"3081HS, Rotterdam",Lochem,2h 46m,166,ok,2026-07-26T01:25:36.235803
+"3081HS, Rotterdam",Losser,3h 15m,195,ok,2026-07-26T01:25:53.239428
+"3081HS, Rotterdam",Coevorden,2h 53m,173,ok,2026-07-26T01:26:10.399300
+"3081HS, Rotterdam",Rheden,2h 18m,138,ok,2026-07-26T01:26:27.420503
+"3081HS, Rotterdam",Middelharnis,1h 6m,66,ok,2026-07-26T01:26:44.662476
+"3081HS, Rotterdam",Heemstede,1h 22m,82,ok,2026-07-26T01:27:01.828963
+"3081HS, Rotterdam",Leiderdorp,1h 33m,93,ok,2026-07-26T01:27:19.030608
+"3081HS, Rotterdam",Lansingerland,57m,57,ok,2026-07-26T01:27:36.342715
+"3081HS, Rotterdam",Halderberge,1h 14m,74,ok,2026-07-26T01:27:53.595151
+"3081HS, Rotterdam",Tubbergen,3h 13m,193,ok,2026-07-26T01:28:10.771973
+"3081HS, Rotterdam",Smallingerland,1h 10m,70,ok,2026-07-26T01:28:28.146156
+"3081HS, Rotterdam",Doesburg,1h 35m,95,ok,2026-07-26T01:29:45.275046
+"3081HS, Rotterdam",Pijnacker-Nootdorp,49m,49,ok,2026-07-26T01:30:02.870863
+"3081HS, Rotterdam",Assen,2h 50m,170,ok,2026-07-26T01:30:19.810090
+"3081HS, Rotterdam",Bronckhorst,1h 41m,101,ok,2026-07-26T01:32:13.845913
+"3081HS, Rotterdam",Druten,2h 44m,164,ok,2026-07-26T01:32:48.017081
+"3081HS, Rotterdam",Boskoop,1h 9m,69,ok,2026-07-26T01:33:22.218155
+"3081HS, Rotterdam",Cranendonck,2h 7m,127,ok,2026-07-26T01:33:39.459427
+"3081HS, Rotterdam",Lingewaard,2h 33m,153,ok,2026-07-26T01:34:10.945608
+"3081HS, Rotterdam",Maurik,2h 16m,136,ok,2026-07-26T01:34:27.911720
+"3081HS, Rotterdam",Simpelveld,3h 38m,218,ok,2026-07-26T01:34:45.077631
+"3081HS, Rotterdam",Warmond,1h 30m,90,ok,2026-07-26T01:35:16.520201
+"3081HS, Rotterdam",Hardinxveld-Giessendam,57m,57,ok,2026-07-26T01:35:48.575095
+"3081HS, Rotterdam",Putte,2h 4m,124,ok,2026-07-26T01:36:22.800917
+"3081HS, Rotterdam",Moerdijk,1h 40m,100,ok,2026-07-26T01:37:11.285866
+"3081HS, Rotterdam",Woensdrecht,2h 2m,122,ok,2026-07-26T01:37:28.535319
+"3081HS, Rotterdam",Teylingen,50m,50,ok,2026-07-26T01:37:59.975977
+"3081HS, Rotterdam",Ouder-Amstel,1h 29m,89,ok,2026-07-26T01:38:17.210203
+"3081HS, Rotterdam",Ossendrecht,2h 10m,130,ok,2026-07-26T01:38:34.430935
+"3081HS, Rotterdam",Reusel-De Mierden,2h 21m,141,ok,2026-07-26T01:39:06.239413
+"3081HS, Rotterdam",Beesel,2h 47m,167,ok,2026-07-26T01:39:23.220111
+"3081HS, Rotterdam",Leudal,3h 17m,197,ok,2026-07-26T01:39:40.237137
+"3081HS, Rotterdam",Veghel,2h 11m,131,ok,2026-07-26T01:39:57.251553
+"3081HS, Rotterdam",Roosteren,2h 50m,170,ok,2026-07-26T01:40:14.408965
+"3081HS, Rotterdam",Gulpen-Wittem,3h 27m,207,ok,2026-07-26T01:40:31.721850
+"3081HS, Rotterdam",Gooise Meren,1h 51m,111,ok,2026-07-26T01:40:49.003780
+"3081HS, Rotterdam",Midden-Drenthe,3h 19m,199,ok,2026-07-26T01:41:06.383752
+"3081HS, Rotterdam",Noordoostpolder,1h 58m,118,ok,2026-07-26T01:41:23.856104
+"3081HS, Rotterdam",Westerveld,1h 52m,112,ok,2026-07-26T01:41:41.050803
+"3081HS, Rotterdam",Eemnes,2h 16m,136,ok,2026-07-26T01:41:58.095486
+"3081HS, Rotterdam",Limmen,2h 12m,132,ok,2026-07-26T01:42:15.054480
+"3081HS, Rotterdam",Wierden,2h 42m,162,ok,2026-07-26T01:42:49.402770
+"3081HS, Rotterdam",Borsele,1h 35m,95,ok,2026-07-26T01:43:06.450802
+"3081HS, Rotterdam",Drechterland,1h 10m,70,ok,2026-07-26T01:43:23.765906
+"3081HS, Rotterdam",Urk,2h 50m,170,ok,2026-07-26T01:43:40.623840
+"3081HS, Rotterdam",Vlieland,5h 37m,337,ok,2026-07-26T01:43:57.701488
+"3081HS, Rotterdam",Schiermonnikoog,5h 28m,328,ok,2026-07-26T01:44:15.104997
+"3081HS, Rotterdam",Westland,1h 11m,71,ok,2026-07-26T01:44:32.188566
+"3081HS, Rotterdam",Nissewaard,38m,38,ok,2026-07-26T01:44:49.375841
+"3081HS, Rotterdam",Krimpenerwaard,54m,54,ok,2026-07-26T01:45:06.727903
+"3081HS, Rotterdam",Molenlanden,3h 26m,206,ok,2026-07-26T01:45:23.956510
+"3081HS, Rotterdam",Vijfheerenlanden,1h 7m,67,ok,2026-07-26T01:45:41.420663
+"3081HS, Rotterdam",West Betuwe,1h 54m,114,ok,2026-07-26T01:45:58.655985
+"3081HS, Rotterdam",Altena,3h 57m,237,ok,2026-07-26T01:46:15.701716
+"3081HS, Rotterdam",Land van Cuijk,1h 35m,95,ok,2026-07-26T01:46:33.109832
+"3081HS, Rotterdam",Maashorst,2h 24m,144,ok,2026-07-26T01:46:50.274862
+"3081HS, Rotterdam",Dijk en Waard,1h 48m,108,ok,2026-07-26T01:47:07.607247
+"3081HS, Rotterdam",Hollands Kroon,2h 38m,158,ok,2026-07-26T01:47:24.937713
+"3081HS, Rotterdam",Het Hogeland,1h 21m,81,ok,2026-07-26T01:47:42.211134
+"3081HS, Rotterdam",Eemsdelta,3h 58m,238,ok,2026-07-26T01:47:59.335922
+"3081HS, Rotterdam",Midden-Groningen,3h 47m,227,ok,2026-07-26T01:48:16.786356
+"3081HS, Rotterdam",Westerkwartier,2h 5m,125,ok,2026-07-26T01:48:34.160941
+"3081HS, Rotterdam",Noardeast-Fryslân,4h 24m,264,ok,2026-07-26T01:48:51.669639
+"3081HS, Rotterdam",Waadhoeke,3h 39m,219,ok,2026-07-26T01:49:08.815916
+"3081HS, Rotterdam",Súdwest-Fryslân,3h 47m,227,ok,2026-07-26T01:49:26.252657
+"3081HS, Rotterdam",De Friese Meren,3h 47m,227,ok,2026-07-26T01:49:43.678791
+"3081HS, Rotterdam",Berg en Dal,2h 43m,163,ok,2026-07-26T01:50:00.927270
+"3081HS, Rotterdam",Beekdaelen,3h 22m,202,ok,2026-07-26T01:50:18.100056
+"3081HS, Rotterdam",Roerdalen,2h 39m,159,ok,2026-07-26T01:50:35.236242
+"3081HS, Rotterdam",Peel en Maas,2h 41m,161,ok,2026-07-26T01:50:52.536910
+"3081HS, Rotterdam",Horst aan de Maas,2h 22m,142,ok,2026-07-26T01:51:10.045262
+"3081HS, Rotterdam",Maasgouw,3h 2m,182,ok,2026-07-26T01:51:27.149832
+"3081HS, Rotterdam",Echt-Susteren,2h 38m,158,ok,2026-07-26T01:51:44.442972
+"3081HS, Rotterdam",Sittard-Geleen,2h 54m,174,ok,2026-07-26T01:52:01.835027
+"3081HS, Rotterdam",Valkenburg aan de Geul,3h 11m,191,ok,2026-07-26T01:52:19.589524
+"3081HS, Rotterdam",Eijsden-Margraten,3h 20m,200,ok,2026-07-26T01:52:37.105379
+"3081HS, Rotterdam",Goeree-Overflakkee,1h 11m,71,ok,2026-07-26T01:52:54.673567
+"3081HS, Rotterdam",Schouwen-Duiveland,1h 17m,77,ok,2026-07-26T01:53:12.231868
+"3081HS, Rotterdam",Noord-Beveland,1h 31m,91,ok,2026-07-26T01:53:29.606202
+"3081HS, Rotterdam",Voorne aan Zee,1h 51m,111,ok,2026-07-26T01:53:46.953852
+"3081HS, Rotterdam",Steenwijkerland,2h 48m,168,ok,2026-07-26T01:54:04.374734
+"3081HS, Rotterdam",Zwartewaterland,3h 6m,186,ok,2026-07-26T01:54:21.777016
+"3081HS, Rotterdam",Twenterand,3h 4m,184,ok,2026-07-26T01:54:38.982664
+"3081HS, Rotterdam",Dinkelland,5h 4m,304,ok,2026-07-26T01:54:56.184428
+"3081HS, Rotterdam",Hof van Twente,3h 6m,186,ok,2026-07-26T01:55:13.537635
+"3081HS, Rotterdam",Rijssen-Holten,2h 42m,162,ok,2026-07-26T01:55:30.913546
+"3081HS, Rotterdam",Oost Gelre,3h 9m,189,ok,2026-07-26T01:55:48.119235
+"3081HS, Rotterdam",Oude IJsselstreek,3h 37m,217,ok,2026-07-26T01:56:05.654814
+"3081HS, Rotterdam",Alphen-Chaam,1h 56m,116,ok,2026-07-26T01:56:22.932198
+"3081HS, Rotterdam",Bernheze,2h 2m,122,ok,2026-07-26T01:56:40.030417
+"3081HS, Rotterdam",Boekel,2h 8m,128,ok,2026-07-26T01:56:57.040627
+"3081HS, Rotterdam",Boxmeer,2h 44m,164,ok,2026-07-26T01:57:14.083661
+"3081HS, Rotterdam",Grave,2h 33m,153,ok,2026-07-26T01:57:31.043211
+"3081HS, Rotterdam",Mill en Sint Hubert,3h 5m,185,ok,2026-07-26T01:57:48.662542
+"3081HS, Rotterdam",Sint Anthonis,2h 35m,155,ok,2026-07-26T01:58:05.960278
+"3081HS, Rotterdam",Dongeradeel,4h 24m,264,ok,2026-07-26T01:58:23.206704
+"3081HS, Rotterdam",Kollum,3h 56m,236,ok,2026-07-26T01:58:57.536746
+"3081HS, Rotterdam",Achtkarspelen,2h 35m,155,ok,2026-07-26T01:59:14.874903
+"3081HS, Rotterdam",Tietjerksteradeel,1h 18m,78,ok,2026-07-26T01:59:32.357986
+"3081HS, Rotterdam",Opsterland,1h 29m,89,ok,2026-07-26T01:59:49.566973
+"3081HS, Rotterdam",Weststellingwerf,"3h
+",180,ok,2026-07-26T02:00:07.083802
+"3081HS, Rotterdam",Ooststellingwerf,3h 41m,221,ok,2026-07-26T02:00:24.522942
+"3081HS, Rotterdam",De Wolden,3h 25m,205,ok,2026-07-26T02:00:41.666460
+"3081HS, Rotterdam",Borger-Odoorn,3h 28m,208,ok,2026-07-26T02:00:58.976955
+"3081HS, Rotterdam",Aa en Hunze,3h 37m,217,ok,2026-07-26T02:01:16.237504
+"3081HS, Rotterdam",Noordenveld,3h 15m,195,ok,2026-07-26T02:01:33.506625
+"3081HS, Rotterdam",Zutphen,2h 19m,139,ok,2026-07-26T02:07:36.774465
+"3081HS, Rotterdam",Bolsward,3h 48m,228,ok,2026-07-26T02:07:53.850959
+"3081HS, Rotterdam",Stein,34m,34,ok,2026-07-26T02:08:10.834598
+"3081HS, Rotterdam",Oudewater,1h 30m,90,ok,2026-07-26T02:08:27.948994
+"3081HS, Rotterdam",Vaals,3h 48m,228,ok,2026-07-26T02:08:44.878810
+"3081HS, Rotterdam",Hattem,2h 33m,153,ok,2026-07-26T02:09:01.845985
+"3081HS, Rotterdam",Sluis,No Results,,timeout,2026-07-26T02:09:18.797449
+"3081HS, Rotterdam",Raalte,2h 30m,150,ok,2026-07-26T02:09:35.801517
+"3081HS, Rotterdam",Voorschoten,1h 12m,72,ok,2026-07-26T02:09:53.007935
+"3081HS, Rotterdam",Bunnik,1h 28m,88,ok,2026-07-26T02:10:10.000005
+"3081HS, Rotterdam",Overbetuwe,2h 26m,146,ok,2026-07-26T02:10:27.179809
+"3081HS, Rotterdam",Naarden,1h 38m,98,ok,2026-07-26T02:10:44.224845
+"3081HS, Rotterdam",Olst-Wijhe,2h 30m,150,ok,2026-07-26T02:11:01.437142
+"3081HS, Rotterdam",Woudenberg,1h 15m,75,ok,2026-07-26T02:11:18.629782
+"3081HS, Rotterdam",Voorst,2h 6m,126,ok,2026-07-26T02:11:35.637981
+"3081HS, Rotterdam",Someren,2h 28m,148,ok,2026-07-26T02:11:52.682050
+"3081HS, Rotterdam",Brielle,1h 12m,72,ok,2026-07-26T02:12:09.693428
+"3081HS, Rotterdam",Oegstgeest,1h 28m,88,ok,2026-07-26T02:12:26.850602
+"3081HS, Rotterdam",Montferland,2h 10m,130,ok,2026-07-26T02:12:44.084766
+"3081HS, Rotterdam",Hillegom,1h 23m,83,ok,2026-07-26T02:13:01.133271
+"3081HS, Rotterdam",Bemmel,2h 31m,151,ok,2026-07-26T02:13:18.115602
+"3081HS, Rotterdam",Kapelle,1h 36m,96,ok,2026-07-26T02:13:35.168538
+"3081HS, Rotterdam",Neder-Betuwe,2h 32m,152,ok,2026-07-26T02:13:52.449655
+"3081HS, Rotterdam",Laarbeek,2h 11m,131,ok,2026-07-26T02:14:09.557406
+"3081HS, Rotterdam",Rucphen,1h 41m,101,ok,2026-07-26T02:14:26.614061
+"3081HS, Rotterdam",Reimerswaal,1h 29m,89,ok,2026-07-26T02:14:43.833849
+"3081HS, Rotterdam",Tynaarlo,4h 8m,248,ok,2026-07-26T02:15:00.934430
+"3081HS, Rotterdam",Stichtse Vecht,1h 40m,100,ok,2026-07-26T02:15:18.320264
+"3081HS, Rotterdam",Ferwerderadiel,No Results,,timeout,2026-07-26T02:15:35.622722
