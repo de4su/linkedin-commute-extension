@@ -71,48 +71,64 @@ function injectBadge(afterEl, timeText) {
 }
 
 function getJobCards() {
-  const cards = [];
+  const containers = new Set();
   
-  // 1. Standard approach (legacy classes)
-  // We prioritize highly specific location elements before broad wrappers.
-  document.querySelectorAll(SELECTORS.jobCard).forEach(card => {
-    let locEl = card.querySelector(".job-card-container__metadata-item, .job-card-square__text, .discovery-job-card__location, .base-search-card__metadata span");
-    if (!locEl) locEl = card.querySelector(".artdeco-entity-lockup__caption");
-    if (locEl) cards.push({ container: card, locEl });
-  });
+  // 1. Find containers using legacy classes
+  document.querySelectorAll("[data-job-id], [data-occludable-job-id], li.jobs-search-results__list-item, div.job-card-container, div.base-card, div.job-card-square, div.discovery-job-card").forEach(c => containers.add(c));
   
-  // 2. SDUI approach (heuristic: look for • or · separators)
+  // 2. Find containers using SDUI heuristic (look for ANY bullet point, it's always inside a job card)
   document.querySelectorAll("p, span").forEach(el => {
     const text = el.innerText?.trim();
     if (text === "•" || text === "·") {
-      const nextEl = el.nextElementSibling;
-      const prevEl = el.previousElementSibling;
-      if (nextEl && prevEl) {
-        const nextText = nextEl.innerText?.trim() || "";
-        const prevText = prevEl.innerText?.trim() || "";
-        // Ignore bullets used for "Applied · 1 week ago" or other metadata
-        if (!nextText.includes("ago") && !prevText.includes("Applied") && !prevText.includes("Viewed") && !prevText.includes("Saved")) {
-          const container = el.closest('div[componentkey]') || el.closest('li, .job-card-container');
-          if (container) cards.push({ container, locEl: nextEl });
-        }
-      }
+      const c = el.closest('div[componentkey]') || el.closest('li, .job-card-container');
+      if (c && c.innerText.length > 20) containers.add(c);
     }
   });
-  
+
   // 3. Detail Pane
-  const detailPane = document.querySelector(SELECTORS.detailPane);
-  if (detailPane) {
-    const locEl = detailPane.querySelector(SELECTORS.detailLocation);
-    if (locEl) cards.push({ container: detailPane, locEl });
+  const detailPane = document.querySelector(".jobs-search__job-details--container, .scaffold-layout__detail, .jobs-details__main-content, .job-view-layout");
+  if (detailPane) containers.add(detailPane);
+
+  const cards = [];
+
+  // For each container, extract candidate location elements
+  for (const container of containers) {
+    let locEls = [];
+    
+    // Try legacy specific selectors first
+    const specificLoc = container.querySelector(".job-card-container__metadata-item, .job-card-square__text, .discovery-job-card__location, .base-search-card__metadata span");
+    if (specificLoc) {
+      locEls.push(specificLoc);
+    } else {
+      // SDUI Fallback: get all candidate text nodes
+      const leaves = Array.from(container.querySelectorAll("p, span")).filter(el => {
+        const t = el.innerText?.trim();
+        return t && t.length > 0 && t.length < 60 && !el.querySelector("p, div, ul, li");
+      });
+      
+      for (let i = 1; i < Math.min(leaves.length, 12); i++) {
+        const text = leaves[i].innerText.trim();
+        if (text === "•" || text === "·") continue;
+        if (text === leaves[i-1].innerText.trim()) continue; // skip aria-hidden duplicates
+        if (/^(Promoted|Easy Apply|Applied|Saved|Viewed|Hide job|Actively reviewing.*|Posted.*)$/i.test(text)) continue;
+        if (text.includes("ago") || text.includes("alumni") || text.includes("connections") || text.includes("Top applicant") || text.includes("matching skills")) continue;
+        
+        locEls.push(leaves[i]);
+      }
+    }
+    
+    // Detail pane fallback
+    if (locEls.length === 0 && container === detailPane) {
+      const dLoc = container.querySelector(".job-details-jobs-unified-top-card__primary-description-container span, .jobs-unified-top-card__bullet, .jobs-unified-top-card__subtitle-primary-grouping span");
+      if (dLoc) locEls.push(dLoc);
+    }
+
+    if (locEls.length > 0) {
+      cards.push({ container, locEls });
+    }
   }
   
-  // Deduplicate by location element
-  const unique = new Map();
-  for (const c of cards) {
-    if (!unique.has(c.locEl)) unique.set(c.locEl, c.container);
-  }
-  
-  return Array.from(unique.entries()).map(([locEl, container]) => ({ locEl, container }));
+  return cards;
 }
 
 async function processVisibleJobs() {
@@ -120,13 +136,15 @@ async function processVisibleJobs() {
 
   const cards = getJobCards();
   
-  for (const { container, locEl } of cards) {
-    if (locEl.dataset.commuteBadge) continue; // already handled or pending
-    const clean = sanitizeLocation(locEl.textContent || "");
-    if (!clean) continue;
-    if (!locations.has(clean)) locations.set(clean, []);
-    locations.get(clean).push({ locEl, container });
-    locEl.dataset.commuteBadge = "pending";
+  for (const { container, locEls } of cards) {
+    for (const locEl of locEls) {
+      if (locEl.dataset.commuteBadge) continue; // already handled or pending
+      const clean = sanitizeLocation(locEl.textContent || "");
+      if (!clean) continue;
+      if (!locations.has(clean)) locations.set(clean, []);
+      locations.get(clean).push({ locEl, container });
+      locEl.dataset.commuteBadge = "pending";
+    }
   }
 
   if (locations.size === 0) return;
