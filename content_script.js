@@ -118,13 +118,14 @@ function updateJobColors() {
   document.querySelectorAll(".job-card-container, .base-card").forEach(card => {
     const text = card.innerText || "";
     
-    let color = "rgba(5, 118, 66, 0.4)"; // Green for not applied/seen
+    let color = "5, 118, 66"; // Green for not applied/seen
     if (text.includes("Applied")) {
-      color = "rgba(217, 48, 37, 0.4)"; // Red for applied
+      color = "217, 48, 37"; // Red for applied
     } else if (text.includes("Saved") || text.includes("Viewed")) {
-      color = "rgba(251, 188, 4, 0.4)"; // Yellow for saved/viewed
+      color = "251, 188, 4"; // Yellow for saved/viewed
     }
-    card.style.setProperty("border-left", `4px solid ${color}`, "important");
+    card.style.setProperty("border-left", `4px solid rgba(${color}, 0.6)`, "important");
+    card.style.setProperty("background", `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${color}, 0.05) 60%, transparent 100%)`, "important");
   });
 }
 
