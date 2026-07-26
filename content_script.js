@@ -70,25 +70,58 @@ function injectBadge(afterEl, timeText) {
   afterEl.insertAdjacentElement("afterend", badge);
 }
 
-async function processVisibleJobs() {
+function getJobCards() {
+  const cards = [];
+  
+  // 1. Standard approach (legacy classes)
+  document.querySelectorAll(SELECTORS.jobCard).forEach(card => {
+    const locEl = card.querySelector(SELECTORS.cardLocation);
+    if (locEl) cards.push({ container: card, locEl });
+  });
+  
+  // 2. SDUI approach (heuristic: look for • or · separators)
+  document.querySelectorAll("p, span").forEach(el => {
+    const text = el.innerText?.trim();
+    if (text === "•" || text === "·") {
+      const nextEl = el.nextElementSibling;
+      const prevEl = el.previousElementSibling;
+      if (nextEl && prevEl) {
+        // Assume prevEl is Company, nextEl is Location
+        const container = el.closest('div[componentkey]') || el.closest('li, .job-card-container');
+        if (container) cards.push({ container, locEl: nextEl });
+      }
+    }
+  });
+  
+  // 3. Detail Pane
+  const detailPane = document.querySelector(SELECTORS.detailPane);
+  if (detailPane) {
+    const locEl = detailPane.querySelector(SELECTORS.detailLocation);
+    if (locEl) cards.push({ container: detailPane, locEl });
+  }
+  
+  // Deduplicate by location element
+  const unique = new Map();
+  for (const c of cards) {
+    if (!unique.has(c.locEl)) unique.set(c.locEl, c.container);
+  }
+  
+  return Array.from(unique.entries()).map(([locEl, container]) => ({ locEl, container }));
+}
 
+async function processVisibleJobs() {
   const locations = new Map(); // sanitized location -> [{container, locEl}]
 
-  const queue = (container, locationSelector) => {
-    const locEl = container.querySelector(locationSelector);
-    if (!locEl) return;
-    if (locEl.dataset.commuteBadge) return; // already handled or pending
+  const cards = getJobCards();
+  
+  for (const { container, locEl } of cards) {
+    if (locEl.dataset.commuteBadge) continue; // already handled or pending
     const clean = sanitizeLocation(locEl.textContent || "");
-    if (!clean) return;
+    if (!clean) continue;
     if (!locations.has(clean)) locations.set(clean, []);
-    locations.get(clean).push({ locEl });
+    locations.get(clean).push({ locEl, container });
     locEl.dataset.commuteBadge = "pending";
-  };
-
-  document.querySelectorAll(SELECTORS.jobCard).forEach((card) => queue(card, SELECTORS.cardLocation));
-
-  const detailPane = document.querySelector(SELECTORS.detailPane);
-  if (detailPane) queue(detailPane, SELECTORS.detailLocation);
+  }
 
   if (locations.size === 0) return;
 
@@ -102,7 +135,7 @@ async function processVisibleJobs() {
   for (const [loc, entries] of locations) {
     const time = results[loc];
     if (!time) {
-      // Clear pending state if no time found so we don't block future retries if settings change
+      // Clear pending state if no time found
       for (const { locEl } of entries) delete locEl.dataset.commuteBadge;
       continue;
     }
@@ -115,8 +148,9 @@ async function processVisibleJobs() {
 }
 
 function updateJobColors() {
-  document.querySelectorAll(".job-card-container, .base-card, .job-card-square, .discovery-job-card").forEach(card => {
-    const text = card.innerText || "";
+  const cards = getJobCards();
+  cards.forEach(({ container }) => {
+    const text = container.innerText || "";
     
     let color = "5, 118, 66"; // Green for not applied/seen
     if (text.includes("Applied")) {
@@ -124,8 +158,8 @@ function updateJobColors() {
     } else if (text.includes("Saved") || text.includes("Viewed")) {
       color = "251, 188, 4"; // Yellow for saved/viewed
     }
-    card.style.setProperty("border-left", `4px solid rgba(${color}, 0.6)`, "important");
-    card.style.setProperty("background", `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${color}, 0.05) 60%, transparent 100%)`, "important");
+    container.style.setProperty("border-left", `4px solid rgba(${color}, 0.6)`, "important");
+    container.style.setProperty("background", `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${color}, 0.05) 60%, transparent 100%)`, "important");
   });
 }
 
