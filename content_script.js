@@ -3,8 +3,8 @@
 // job card (or the detail pane) → Inspect, find the element holding the
 // location text, and update SELECTORS below.
 const SELECTORS = {
-  jobCard: "[data-occludable-job-id], li.scaffold-layout__list-item, div.job-card-container, [data-job-id], li.jobs-search-results__list-item, div.base-card",
-  cardLocation: ".artdeco-entity-lockup__caption, .job-card-container__metadata-item, .base-search-card__metadata span",
+  jobCard: "[data-occludable-job-id], li.scaffold-layout__list-item, div.job-card-container, [data-job-id], li.jobs-search-results__list-item, div.base-card, div.job-card-square, div.discovery-job-card",
+  cardLocation: ".artdeco-entity-lockup__caption, .job-card-container__metadata-item, .base-search-card__metadata span, .job-card-square__text, .discovery-job-card__location",
   detailPane: ".jobs-search__job-details--container, .scaffold-layout__detail, .jobs-details__main-content, .job-view-layout",
   detailLocation:
     ".job-details-jobs-unified-top-card__primary-description-container span, .jobs-unified-top-card__bullet, .jobs-unified-top-card__subtitle-primary-grouping span",
@@ -115,7 +115,7 @@ async function processVisibleJobs() {
 }
 
 function updateJobColors() {
-  document.querySelectorAll(".job-card-container, .base-card").forEach(card => {
+  document.querySelectorAll(".job-card-container, .base-card, .job-card-square, .discovery-job-card").forEach(card => {
     const text = card.innerText || "";
     
     let color = "5, 118, 66"; // Green for not applied/seen
