@@ -47,10 +47,13 @@ async function handleGetCommuteTimes({ locations }) {
       hit = activeDb[aliases[clean]] || aliases[clean];
     }
     
-    // 3. Fuzzy match (e.g. "noordwijk-binnen" matches "noordwijk")
+    // 3. Fuzzy match
     if (!hit) {
       for (const dbKey in activeDb) {
-        if (clean.includes(dbKey) || dbKey.includes(clean)) {
+        // Only allow substring match if it's a full word match (using spaces/hyphens as boundaries)
+        const escapedDbKey = dbKey.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(?:^|[- ])${escapedDbKey}(?:[- ]|$)`, 'i');
+        if (regex.test(clean) || (clean.length > 4 && dbKey.includes(clean))) {
           hit = activeDb[dbKey];
           break;
         }

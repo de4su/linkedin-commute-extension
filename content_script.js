@@ -67,7 +67,7 @@ function injectBadge(afterEl, timeText) {
   const badge = document.createElement("span");
   badge.className = "commute-badge";
   badge.textContent = `🚆 ${timeText}`;
-  afterEl.insertAdjacentElement("afterend", badge);
+  afterEl.appendChild(badge);
 }
 
 function getJobCards() {
