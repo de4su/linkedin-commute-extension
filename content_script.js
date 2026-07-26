@@ -124,8 +124,7 @@ function updateJobColors() {
     } else if (text.includes("Saved") || text.includes("Viewed")) {
       color = "#fbbc04"; // Yellow for saved/viewed
     }
-    
-    card.style.borderLeft = `4px solid ${color}`;
+    card.style.setProperty("border-left", `4px solid ${color}`, "important");
   });
 }
 
