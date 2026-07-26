@@ -74,8 +74,10 @@ function getJobCards() {
   const cards = [];
   
   // 1. Standard approach (legacy classes)
+  // We prioritize highly specific location elements before broad wrappers.
   document.querySelectorAll(SELECTORS.jobCard).forEach(card => {
-    const locEl = card.querySelector(SELECTORS.cardLocation);
+    let locEl = card.querySelector(".job-card-container__metadata-item, .job-card-square__text, .discovery-job-card__location, .base-search-card__metadata span");
+    if (!locEl) locEl = card.querySelector(".artdeco-entity-lockup__caption");
     if (locEl) cards.push({ container: card, locEl });
   });
   
@@ -86,9 +88,13 @@ function getJobCards() {
       const nextEl = el.nextElementSibling;
       const prevEl = el.previousElementSibling;
       if (nextEl && prevEl) {
-        // Assume prevEl is Company, nextEl is Location
-        const container = el.closest('div[componentkey]') || el.closest('li, .job-card-container');
-        if (container) cards.push({ container, locEl: nextEl });
+        const nextText = nextEl.innerText?.trim() || "";
+        const prevText = prevEl.innerText?.trim() || "";
+        // Ignore bullets used for "Applied · 1 week ago" or other metadata
+        if (!nextText.includes("ago") && !prevText.includes("Applied") && !prevText.includes("Viewed") && !prevText.includes("Saved")) {
+          const container = el.closest('div[componentkey]') || el.closest('li, .job-card-container');
+          if (container) cards.push({ container, locEl: nextEl });
+        }
       }
     }
   });
