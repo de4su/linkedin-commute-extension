@@ -114,7 +114,25 @@ async function processVisibleJobs() {
   }
 }
 
-const scheduleProcess = debounceWithMaxWait(processVisibleJobs, 500, 2000);
+function updateJobColors() {
+  document.querySelectorAll(".job-card-container, .base-card").forEach(card => {
+    const text = card.innerText || "";
+    
+    let color = "#057642"; // Green for not applied/seen
+    if (text.includes("Applied")) {
+      color = "#d93025"; // Red for applied
+    } else if (text.includes("Saved") || text.includes("Viewed")) {
+      color = "#fbbc04"; // Yellow for saved/viewed
+    }
+    
+    card.style.borderLeft = `4px solid ${color}`;
+  });
+}
+
+const scheduleProcess = debounceWithMaxWait(() => {
+  processVisibleJobs();
+  updateJobColors();
+}, 500, 2000);
 
 // LinkedIn's jobs page is a single-page app: pagination and clicking into a
 // job both happen via history.pushState, not a full navigation, so a plain
