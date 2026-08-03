@@ -90,6 +90,20 @@ async function handleTrackJobStatus({ jobKey, title, company, location, status }
   }
   
   jobTracker[jobKey] = existing;
+  
+  // Prune if tracker grows too large (keep most recent 1500 of 2000 max)
+  const keys = Object.keys(jobTracker);
+  if (keys.length > 2000) {
+    const sorted = keys.sort((a, b) => {
+      const dateA = jobTracker[a].appliedDate || jobTracker[a].viewedDate || jobTracker[a].savedDate || "0";
+      const dateB = jobTracker[b].appliedDate || jobTracker[b].viewedDate || jobTracker[b].savedDate || "0";
+      return dateA.localeCompare(dateB);
+    });
+    for (let i = 0; i < sorted.length - 1500; i++) {
+      delete jobTracker[sorted[i]];
+    }
+  }
+  
   await browserAPI.storage.local.set({ jobTracker });
   return existing;
 }

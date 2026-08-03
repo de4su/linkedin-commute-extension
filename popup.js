@@ -121,4 +121,53 @@ els.csvFile.addEventListener("change", async (e) => {
   reader.readAsText(file);
 });
 
+// -- Application Tracker UI --
 
+const trackerStatusEl = document.getElementById("trackerStatus");
+const exportBtn = document.getElementById("exportTracker");
+const clearTrackerBtn = document.getElementById("clearTracker");
+
+async function updateTrackerStatus() {
+  const { jobTracker = {} } = await browserAPI.storage.local.get("jobTracker");
+  const count = Object.keys(jobTracker).length;
+  const applied = Object.values(jobTracker).filter(e => e.appliedDate).length;
+  const viewed = Object.values(jobTracker).filter(e => e.viewedDate && !e.appliedDate).length;
+  if (count === 0) {
+    trackerStatusEl.textContent = "No jobs tracked yet.";
+  } else {
+    trackerStatusEl.textContent = `${count} jobs tracked (${applied} applied, ${viewed} viewed only).`;
+  }
+}
+updateTrackerStatus();
+
+exportBtn.addEventListener("click", async () => {
+  const { jobTracker = {} } = await browserAPI.storage.local.get("jobTracker");
+  const entries = Object.values(jobTracker);
+  if (entries.length === 0) {
+    trackerStatusEl.textContent = "Nothing to export.";
+    return;
+  }
+  
+  const csvRows = ["Title,Company,Applied Date,Viewed Date,Saved Date"];
+  for (const e of entries) {
+    const escape = (s) => `"${(s || "").replace(/"/g, '""')}"`;
+    csvRows.push([escape(e.title), escape(e.company), e.appliedDate || "", e.viewedDate || "", e.savedDate || ""].join(","));
+  }
+  
+  const blob = new Blob([csvRows.join("\n")], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "linkedin_applications.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+  trackerStatusEl.textContent = "Exported!";
+  trackerStatusEl.style.color = "#057642";
+});
+
+clearTrackerBtn.addEventListener("click", async () => {
+  if (!confirm("Clear all tracked application dates? This cannot be undone.")) return;
+  await browserAPI.storage.local.remove("jobTracker");
+  trackerStatusEl.textContent = "History cleared.";
+  trackerStatusEl.style.color = "#5e5e5e";
+});

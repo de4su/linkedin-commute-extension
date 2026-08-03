@@ -1,14 +1,7 @@
 // LinkedIn's markup isn't public or versioned and changes without notice, so
-// these selectors are a best effort. If badges stop appearing: right-click a
-// job card (or the detail pane) → Inspect, find the element holding the
-// location text, and update SELECTORS below.
-const SELECTORS = {
-  jobCard: "[data-occludable-job-id], li.scaffold-layout__list-item, div.job-card-container, [data-job-id], li.jobs-search-results__list-item, div.base-card, div.job-card-square, div.discovery-job-card",
-  cardLocation: ".artdeco-entity-lockup__caption, .job-card-container__metadata-item, .base-search-card__metadata span, .job-card-square__text, .discovery-job-card__location",
-  detailPane: ".jobs-search__job-details--container, .scaffold-layout__detail, .jobs-details__main-content, .job-view-layout",
-  detailLocation:
-    ".job-details-jobs-unified-top-card__primary-description-container span, .jobs-unified-top-card__bullet, .jobs-unified-top-card__subtitle-primary-grouping span",
-};
+// the selectors below are a best effort. If badges stop appearing: right-click
+// a job card (or the detail pane) -> Inspect, find the element holding the
+// location text, and update the selectors in getJobCards().
 
 const browserAPI = typeof browser !== "undefined" ? browser : chrome;
 
@@ -60,7 +53,12 @@ function log(msg) {
 
 function requestCommuteTimes(locations) {
   log(`Requesting times for ${locations.length} locations...`);
-  return browserAPI.runtime.sendMessage({ type: "GET_COMMUTE_TIMES", locations });
+  try {
+    return browserAPI.runtime.sendMessage({ type: "GET_COMMUTE_TIMES", locations });
+  } catch (e) {
+    log("Service worker unavailable, will retry on next cycle.");
+    return Promise.resolve(null);
+  }
 }
 
 function injectBadge(afterEl, timeText) {
@@ -196,15 +194,19 @@ function extractCardInfo(container) {
   // Title is usually the first meaningful line
   let title = "";
   let company = "";
+  const SKIP_RE = /^(Promoted|Easy Apply|Applied|Saved|Viewed|Hide|Dismiss|More options)$/i;
   for (const line of lines) {
-    if (!title && line.length > 2 && line.length < 120
-        && !/^(Promoted|Easy Apply|Applied|Saved|Viewed|Hide|Dismiss|More options)$/i.test(line)) {
-      title = line;
+    // Strip any injected badge text so it doesn't corrupt the key
+    const clean = line.replace(/[\U0001F686]\s*\d+[hm]\s*\d*[m]?/g, "").replace(/Applied \d+ \w+/g, "").replace(/Viewed \d+ \w+/g, "").replace(/\s*[·]\s*/g, " ").trim();
+    if (!clean) continue;
+    if (!title && clean.length > 2 && clean.length < 120 && !SKIP_RE.test(clean)) {
+      title = clean;
       continue;
     }
-    if (title && !company && line.length > 1 && line.length < 80
-        && line !== title && !/^(Promoted|Easy Apply|Applied|Saved|Viewed|Hide|Dismiss|More options|•|·)$/i.test(line)) {
-      company = line;
+    if (title && !company && clean.length > 1 && clean.length < 80
+        && clean !== title && !SKIP_RE.test(clean)
+        && !/^[•·]$/.test(clean)) {
+      company = clean;
       break;
     }
   }
@@ -231,61 +233,76 @@ function formatDate(dateStr) {
 async function trackAndDisplayDates() {
   const cards = getJobCards();
   
+  // 1. Save any new statuses (await them so tracker is up-to-date when we read it)
+  const savePromises = [];
   for (const { container } of cards) {
-    if (container.dataset.dateTracked === "1") continue;
-    
     const { title, company, status, jobKey } = extractCardInfo(container);
-    if (!title || !company) continue;
+    if (!title || !company || !status) continue;
     
-    // Send status to background to save (if it has a trackable status)
-    if (status) {
+    // If we've already tracked THIS EXACT status on this DOM node, skip it
+    if (container.dataset.trackedStatus === status) continue;
+    
+    savePromises.push(
       browserAPI.runtime.sendMessage({
         type: "TRACK_JOB_STATUS",
         jobKey, title, company, status
-      }).catch(() => {});
-    }
+      }).catch(() => {})
+    );
     
-    container.dataset.dateTracked = "1";
+    container.dataset.trackedStatus = status;
   }
   
-  // Now fetch the full tracker and inject date badges
+  // Wait for all saves to complete
+  if (savePromises.length > 0) await Promise.all(savePromises);
+  
+  // 2. Fetch the full tracker and inject date badges
   let tracker;
   try {
     tracker = await browserAPI.runtime.sendMessage({ type: "GET_JOB_TRACKER" });
   } catch { return; }
   if (!tracker || Object.keys(tracker).length === 0) return;
   
-  for (const { container } of cards) {
-    if (container.dataset.dateBadge === "1") continue;
-    
+  for (const { container, locEls } of cards) {
     const { jobKey } = extractCardInfo(container);
     const entry = tracker[jobKey];
     if (!entry) continue;
     if (!entry.appliedDate && !entry.viewedDate) continue;
     
-    // Find the title element to inject near
-    // Look for the first link or bold/large text element
-    const titleEl = container.querySelector('a[href*="/jobs/"], a[href*="currentJobId"], [class*="title"], [class*="Title"]')
-      || container.querySelector('p, span');
-    if (!titleEl) continue;
-    
-    const dateBadge = document.createElement("span");
-    dateBadge.className = "tracker-date-badge";
-    
     const parts = [];
     if (entry.appliedDate) parts.push(`Applied ${formatDate(entry.appliedDate)}`);
     if (entry.viewedDate) parts.push(`Viewed ${formatDate(entry.viewedDate)}`);
-    dateBadge.textContent = parts.join(" · ");
+    const badgeText = parts.join(" · ");
     
-    titleEl.appendChild(dateBadge);
-    container.dataset.dateBadge = "1";
+    // Skip if we already injected this exact badge text
+    if (container.dataset.badgeText === badgeText) continue;
+    
+    // Inject next to the first location element (which we already find reliably)
+    const targetEl = locEls?.[0];
+    if (!targetEl) continue;
+    
+    // Remove old badge if it exists
+    const oldBadge = targetEl.querySelector(".tracker-date-badge");
+    if (oldBadge) oldBadge.remove();
+    
+    const dateBadge = document.createElement("span");
+    dateBadge.className = "tracker-date-badge";
+    dateBadge.textContent = badgeText;
+    
+    targetEl.appendChild(dateBadge);
+    container.dataset.badgeText = badgeText;
   }
 }
 
-const scheduleProcess = debounceWithMaxWait(() => {
-  processVisibleJobs();
-  updateJobColors();
-  trackAndDisplayDates();
+const scheduleProcess = debounceWithMaxWait(async () => {
+  try {
+    await processVisibleJobs();
+    updateJobColors();
+    await trackAndDisplayDates();
+  } catch (e) {
+    // Extension context invalidated (e.g. after update) -- silently ignore
+    if (e.message?.includes("Extension context invalidated")) return;
+    console.warn("[Commute Extension]", e.message);
+  }
 }, 500, 2000);
 
 // LinkedIn's jobs page is a single-page app: pagination and clicking into a
