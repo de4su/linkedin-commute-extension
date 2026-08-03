@@ -187,9 +187,105 @@ function updateJobColors() {
   });
 }
 
+// ── Application Date Tracker ────────────────────────────────────────
+
+function extractCardInfo(container) {
+  const text = container.innerText || "";
+  const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
+  
+  // Title is usually the first meaningful line
+  let title = "";
+  let company = "";
+  for (const line of lines) {
+    if (!title && line.length > 2 && line.length < 120
+        && !/^(Promoted|Easy Apply|Applied|Saved|Viewed|Hide|Dismiss|More options)$/i.test(line)) {
+      title = line;
+      continue;
+    }
+    if (title && !company && line.length > 1 && line.length < 80
+        && line !== title && !/^(Promoted|Easy Apply|Applied|Saved|Viewed|Hide|Dismiss|More options|•|·)$/i.test(line)) {
+      company = line;
+      break;
+    }
+  }
+  
+  let status = null;
+  if (text.includes("Applied")) status = "Applied";
+  else if (text.includes("Viewed")) status = "Viewed";
+  else if (text.includes("Saved")) status = "Saved";
+  
+  // Build a stable key from title + company
+  const jobKey = (title + "|||" + company).toLowerCase().replace(/\s+/g, " ");
+  
+  return { title, company, status, jobKey };
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return null;
+  const d = new Date(dateStr + "T00:00:00");
+  const day = d.getDate();
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return `${day} ${months[d.getMonth()]}`;
+}
+
+async function trackAndDisplayDates() {
+  const cards = getJobCards();
+  
+  for (const { container } of cards) {
+    if (container.dataset.dateTracked === "1") continue;
+    
+    const { title, company, status, jobKey } = extractCardInfo(container);
+    if (!title || !company) continue;
+    
+    // Send status to background to save (if it has a trackable status)
+    if (status) {
+      browserAPI.runtime.sendMessage({
+        type: "TRACK_JOB_STATUS",
+        jobKey, title, company, status
+      }).catch(() => {});
+    }
+    
+    container.dataset.dateTracked = "1";
+  }
+  
+  // Now fetch the full tracker and inject date badges
+  let tracker;
+  try {
+    tracker = await browserAPI.runtime.sendMessage({ type: "GET_JOB_TRACKER" });
+  } catch { return; }
+  if (!tracker || Object.keys(tracker).length === 0) return;
+  
+  for (const { container } of cards) {
+    if (container.dataset.dateBadge === "1") continue;
+    
+    const { jobKey } = extractCardInfo(container);
+    const entry = tracker[jobKey];
+    if (!entry) continue;
+    if (!entry.appliedDate && !entry.viewedDate) continue;
+    
+    // Find the title element to inject near
+    // Look for the first link or bold/large text element
+    const titleEl = container.querySelector('a[href*="/jobs/"], a[href*="currentJobId"], [class*="title"], [class*="Title"]')
+      || container.querySelector('p, span');
+    if (!titleEl) continue;
+    
+    const dateBadge = document.createElement("span");
+    dateBadge.className = "tracker-date-badge";
+    
+    const parts = [];
+    if (entry.appliedDate) parts.push(`Applied ${formatDate(entry.appliedDate)}`);
+    if (entry.viewedDate) parts.push(`Viewed ${formatDate(entry.viewedDate)}`);
+    dateBadge.textContent = parts.join(" · ");
+    
+    titleEl.appendChild(dateBadge);
+    container.dataset.dateBadge = "1";
+  }
+}
+
 const scheduleProcess = debounceWithMaxWait(() => {
   processVisibleJobs();
   updateJobColors();
+  trackAndDisplayDates();
 }, 500, 2000);
 
 // LinkedIn's jobs page is a single-page app: pagination and clicking into a

@@ -66,15 +66,65 @@ async function handleGetCommuteTimes({ locations }) {
   return results;
 }
 
+// ── Application Tracker ──────────────────────────────────────────────
+
+async function handleTrackJobStatus({ jobKey, title, company, location, status }) {
+  if (!jobKey) return;
+  const { jobTracker = {} } = await browserAPI.storage.local.get("jobTracker");
+  const existing = jobTracker[jobKey] || { title, company, location };
+  
+  // Always keep the latest title/company/location
+  existing.title = title || existing.title;
+  existing.company = company || existing.company;
+  existing.location = location || existing.location;
+  
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  
+  // Only set the date the FIRST time we see a status (don't overwrite)
+  if (status === "Applied" && !existing.appliedDate) {
+    existing.appliedDate = today;
+  } else if (status === "Viewed" && !existing.viewedDate) {
+    existing.viewedDate = today;
+  } else if (status === "Saved" && !existing.savedDate) {
+    existing.savedDate = today;
+  }
+  
+  jobTracker[jobKey] = existing;
+  await browserAPI.storage.local.set({ jobTracker });
+  return existing;
+}
+
+async function handleGetJobTracker() {
+  const { jobTracker = {} } = await browserAPI.storage.local.get("jobTracker");
+  return jobTracker;
+}
+
+// ── Message Router ───────────────────────────────────────────────────
+
 browserAPI.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-  if (message?.type !== "GET_COMMUTE_TIMES") return;
-  handleGetCommuteTimes(message)
-    .then(sendResponse)
-    .catch((err) => {
-      console.error("[commute-ext] lookup failed:", err.message);
-      sendResponse({});
-    });
-  return true; // keep the message channel open for the async response
+  if (message?.type === "GET_COMMUTE_TIMES") {
+    handleGetCommuteTimes(message)
+      .then(sendResponse)
+      .catch((err) => {
+        console.error("[commute-ext] lookup failed:", err.message);
+        sendResponse({});
+      });
+    return true;
+  }
+  
+  if (message?.type === "TRACK_JOB_STATUS") {
+    handleTrackJobStatus(message)
+      .then(sendResponse)
+      .catch(() => sendResponse(null));
+    return true;
+  }
+  
+  if (message?.type === "GET_JOB_TRACKER") {
+    handleGetJobTracker()
+      .then(sendResponse)
+      .catch(() => sendResponse({}));
+    return true;
+  }
 });
 
 
