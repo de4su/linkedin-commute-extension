@@ -9,6 +9,12 @@ I built this so you can instantly see if a job is worth applying to based on the
 - **BYOD (Bring Your Own Data):** Out of the box, it comes pre-loaded with a dataset. If you want to use your own travel times, you can just upload a simple `.csv` file in the extension popup.
 - **Smart matching:** Job postings often have messy locations like "Noordwijk-Binnen, South Holland". The extension handles this gracefully and matches it to your data.
 - **Home City Auto-detect:** When you upload your own dataset, the extension figures out your starting city automatically and marks it as a `0m` commute.
+- **Color-coded job cards:** Each job card gets a colored left border and subtle background gradient based on its status:
+  - 🟢 **Green** — Fresh jobs you haven't interacted with yet.
+  - 🟡 **Yellow** — Jobs you've Viewed or Saved.
+  - 🔴 **Red** — Jobs you've Applied to.
+- **Application date tracker:** Automatically records the date you first Applied or Viewed a job. Shows a small red badge (e.g. `Applied 3 Aug`) next to the job title so you always know when you applied — no more guessing.
+- **Works everywhere on LinkedIn Jobs:** Supports all LinkedIn job page layouts including Search Results, Collections, Top Applicant, and the Jobs Homepage — even LinkedIn's new obfuscated SDUI pages.
 
 ## How to Install it
 Since it's not on the Chrome Web Store yet, you can install it in Developer Mode:
