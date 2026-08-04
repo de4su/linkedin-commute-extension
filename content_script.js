@@ -231,11 +231,28 @@ function formatDate(dateStr) {
 }
 
 async function trackAndDisplayDates() {
-  const cards = getJobCards();
+  // Find ALL job card containers independently (not limited to cards with location elements)
+  const containers = new Set();
   
+  // Legacy selectors
+  document.querySelectorAll("[data-job-id], [data-occludable-job-id], li.jobs-search-results__list-item, div.job-card-container, div.base-card, div.job-card-square, div.discovery-job-card").forEach(c => containers.add(c));
+  
+  // SDUI containers
+  document.querySelectorAll('div[componentkey]').forEach(c => {
+    if (c.innerText && c.innerText.length > 20 && c.innerText.length < 2000) containers.add(c);
+  });
+  
+  // Also grab any <li> that contains status text
+  document.querySelectorAll("li").forEach(li => {
+    const t = li.innerText || "";
+    if (t.length > 20 && t.length < 2000 && (t.includes("Applied") || t.includes("Viewed") || t.includes("Saved"))) {
+      containers.add(li);
+    }
+  });
+
   // 1. Save any new statuses (await them so tracker is up-to-date when we read it)
   const savePromises = [];
-  for (const { container } of cards) {
+  for (const container of containers) {
     const { title, company, status, jobKey } = extractCardInfo(container);
     if (!title || !company || !status) continue;
     
@@ -262,33 +279,54 @@ async function trackAndDisplayDates() {
   } catch { return; }
   if (!tracker || Object.keys(tracker).length === 0) return;
   
-  for (const { container, locEls } of cards) {
-    const { jobKey } = extractCardInfo(container);
+  for (const container of containers) {
+    const { jobKey, status } = extractCardInfo(container);
+    if (!jobKey || !status) continue;
+    
     const entry = tracker[jobKey];
     if (!entry) continue;
     if (!entry.appliedDate && !entry.viewedDate) continue;
     
     const parts = [];
-    if (entry.appliedDate) parts.push(`Applied ${formatDate(entry.appliedDate)}`);
-    if (entry.viewedDate) parts.push(`Viewed ${formatDate(entry.viewedDate)}`);
-    const badgeText = parts.join(" · ");
+    if (entry.appliedDate) parts.push("Applied " + formatDate(entry.appliedDate));
+    if (entry.viewedDate) parts.push("Viewed " + formatDate(entry.viewedDate));
+    const badgeText = parts.join(" / ");
     
     // Skip if we already injected this exact badge text
     if (container.dataset.badgeText === badgeText) continue;
     
-    // Inject next to the first location element (which we already find reliably)
-    const targetEl = locEls?.[0];
-    if (!targetEl) continue;
-    
     // Remove old badge if it exists
-    const oldBadge = targetEl.querySelector(".tracker-date-badge");
+    const oldBadge = container.querySelector(".tracker-date-badge");
     if (oldBadge) oldBadge.remove();
+    
+    // Find the status text element ("Applied", "Viewed", "Saved") to inject next to
+    let statusEl = null;
+    const candidates = container.querySelectorAll("p, span, div");
+    for (const el of candidates) {
+      const t = (el.innerText || "").trim();
+      if (/^(Applied|Viewed|Saved)$/i.test(t) && !el.querySelector("p, span, div")) {
+        statusEl = el;
+        break;
+      }
+    }
+    
+    // Fallback: inject after the company name area (second text element)
+    if (!statusEl) {
+      const textEls = Array.from(container.querySelectorAll("p, span")).filter(el => {
+        const t = (el.innerText || "").trim();
+        return t.length > 2 && t.length < 100 && !el.querySelector("p, span, div");
+      });
+      if (textEls.length >= 2) statusEl = textEls[1];
+      else if (textEls.length >= 1) statusEl = textEls[0];
+    }
+    
+    if (!statusEl) continue;
     
     const dateBadge = document.createElement("span");
     dateBadge.className = "tracker-date-badge";
     dateBadge.textContent = badgeText;
     
-    targetEl.appendChild(dateBadge);
+    statusEl.insertAdjacentElement("afterend", dateBadge);
     container.dataset.badgeText = badgeText;
   }
 }

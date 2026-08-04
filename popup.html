@@ -3,122 +3,372 @@
 <head>
 <meta charset="UTF-8" />
 <title>Commute Time Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --li-blue: #0a66c2;
-    --ink: #1a1a1a;
-    --muted: #5e5e5e;
-    --border: #d9d9d9;
+    --bg: #1b1f23;
+    --surface: #252a30;
+    --surface-hover: #2d333a;
+    --border: rgba(255,255,255,0.08);
+    --border-focus: #4a9eff;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #4a9eff;
+    --accent-dim: rgba(74, 158, 255, 0.12);
+    --green: #3fb950;
+    --green-dim: rgba(63, 185, 80, 0.12);
+    --red: #f85149;
+    --red-dim: rgba(248, 81, 73, 0.12);
+    --radius: 8px;
   }
-  * { box-sizing: border-box; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
-    width: 300px;
-    margin: 0;
-    padding: 16px;
-    background: #fff;
-    color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    width: 340px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 0;
+    overflow-x: hidden;
   }
-  h1 {
-    font-size: 14px;
+
+  /* -- Header -- */
+  .header {
+    padding: 20px 20px 16px;
+    background: linear-gradient(135deg, #1e3a5f 0%, #1b1f23 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 16px;
     font-weight: 700;
-    margin: 0 0 14px;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .header p {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* -- Sections -- */
+  .section {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-title {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 6px;
   }
-  h1::before { content: "🧭"; font-size: 16px; }
-  label {
-    display: block;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 14px 0 4px;
-  }
-  label:first-of-type { margin-top: 0; }
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 7px 9px;
-    font-size: 13px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    outline: none;
-  }
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    border-color: var(--li-blue);
-    box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.15);
-  }
-  .modes { display: flex; gap: 8px; }
-  .mode-option {
-    flex: 1;
+
+  /* -- Inputs -- */
+  .input-row {
     display: flex;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  input[type="text"] {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input[type="text"]:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+  }
+  input[type="text"]::placeholder { color: var(--text-muted); }
+
+  /* -- Buttons -- */
+  .btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 7px 0;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-size: 12px;
-    cursor: pointer;
-    user-select: none;
-  }
-  .mode-option input { accent-color: var(--li-blue); margin: 0; }
-  .mode-option:has(input:checked) {
-    border-color: var(--li-blue);
-    background: rgba(10, 102, 194, 0.06);
-    font-weight: 600;
-  }
-  button {
-    width: 100%;
-    margin-top: 16px;
-    padding: 8px 0;
-    background: var(--li-blue);
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  button:hover { background: #094c92; }
-  button:focus-visible { outline: 2px solid #094c92; outline-offset: 2px; }
-  #status {
-    min-height: 14px;
-    margin: 8px 0 0;
+    gap: 5px;
+    padding: 8px 14px;
     font-size: 11px;
-    color: var(--muted);
+    font-weight: 600;
+    font-family: inherit;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn-accent {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-accent:hover { background: #3d8be0; }
+
+  .btn-green {
+    background: var(--green-dim);
+    color: var(--green);
+    border: 1px solid rgba(63, 185, 80, 0.2);
+  }
+  .btn-green:hover { background: rgba(63, 185, 80, 0.2); }
+
+  .btn-red {
+    background: var(--red-dim);
+    color: var(--red);
+    border: 1px solid rgba(248, 81, 73, 0.2);
+  }
+  .btn-red:hover { background: rgba(248, 81, 73, 0.2); }
+
+  .btn-ghost {
+    background: var(--surface);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--surface-hover); color: var(--text); }
+
+  .btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .btn-row .btn { flex: 1; }
+
+  /* -- File upload zone -- */
+  .upload-zone {
+    position: relative;
+    border: 1.5px dashed rgba(255,255,255,0.12);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface);
+    margin-top: 8px;
+  }
+  .upload-zone:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .upload-zone.dragover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .upload-icon {
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 6px;
+    opacity: 0.4;
+  }
+  .upload-text {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .upload-text strong { color: var(--accent); }
+
+  /* -- Info tooltip -- */
+  .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    cursor: help;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .info-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    padding: 12px;
+    background: #2d333a;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    z-index: 100;
+    text-align: left;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .info-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #2d333a;
+  }
+  .info-icon:hover .info-tooltip { display: block; }
+  .info-tooltip code {
+    display: block;
+    margin-top: 6px;
+    padding: 8px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 10px;
+    color: var(--green);
+    white-space: pre;
+    line-height: 1.6;
+  }
+  .info-tooltip .tip-label {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  /* -- Status -- */
+  .status-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    min-height: 16px;
+    transition: color 0.2s;
+  }
+  .status-text.success { color: var(--green); }
+  .status-text.error { color: var(--red); }
+
+  /* -- Tracker stats -- */
+  .tracker-stats {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .stat-card {
+    flex: 1;
+    padding: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     text-align: center;
   }
+  .stat-number {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .stat-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .stat-card.applied .stat-number { color: var(--red); }
+  .stat-card.viewed .stat-number { color: #d29922; }
+  .stat-card.total .stat-number { color: var(--accent); }
 </style>
 </head>
 <body>
-  <h1>Commute Time</h1>
 
-  <label for="homeCity" style="font-size: 12px; margin-top: 8px; display: block;">Home City (will show as 0m):</label>
-  <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-    <input type="text" id="homeCity" placeholder="e.g. Rotterdam" style="flex: 2; font-size: 11px; padding: 4px;" />
-    <button id="saveHomeCity" style="flex: 1; font-size: 11px;">Save</button>
+  <!-- Header -->
+  <div class="header">
+    <h1>Commute Time</h1>
+    <p>LinkedIn job commute and application tracker</p>
   </div>
 
-  <p style="font-size: 12px;">Upload a custom <code>9292_travel_times.csv</code> to use your own travel times database.</p>
-  
-  <input type="file" id="csvFile" accept=".csv" style="width: 100%; margin-bottom: 8px; font-size: 11px;" />
-  
-  <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-    <button id="clearData" style="flex: 1; background: #d93025; font-size: 11px; padding: 6px;">Clear Custom Data</button>
+  <!-- Home City -->
+  <div class="section">
+    <div class="section-title">Home City</div>
+    <div class="input-row">
+      <input type="text" id="homeCity" placeholder="e.g. Rotterdam" />
+      <button class="btn btn-accent" id="saveHomeCity">Save</button>
+    </div>
+    <p class="status-text" style="font-size:10px; margin-top:4px; color: var(--text-muted);">Your home city will show as 0m commute.</p>
   </div>
-  <p id="status" style="font-size: 11px; font-weight: bold; margin-bottom: 8px;"></p>
 
-  <hr style="border: none; border-top: 1px solid var(--border); margin: 14px 0;">
-  <label>Application Tracker</label>
-  <p id="trackerStatus" style="font-size: 11px; color: var(--muted); margin: 4px 0 8px;">Loading...</p>
-  <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-    <button id="exportTracker" style="flex: 1; background: #057642; font-size: 11px; padding: 6px;">Export CSV</button>
-    <button id="clearTracker" style="flex: 1; background: #d93025; font-size: 11px; padding: 6px;">Clear History</button>
+  <!-- CSV Upload -->
+  <div class="section">
+    <div class="section-title">
+      Travel Times Data
+      <span class="info-icon">
+        ?
+        <div class="info-tooltip">
+          <div class="tip-label">Required CSV format</div>
+          Your CSV must have these columns:
+          <code>Origin,Destination,Travel_Time
+Rotterdam,Amsterdam,45m
+Rotterdam,Utrecht,30m
+Rotterdam,Den Haag,25m</code>
+          <br>
+          <strong>Origin</strong> is optional but auto-detects your home city.<br>
+          <strong>Destination</strong> and <strong>Travel_Time</strong> are required.
+        </div>
+      </span>
+    </div>
+
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="csvFile" accept=".csv" />
+      <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+      <div class="upload-text">
+        <strong>Click to upload</strong> or drag and drop<br>
+        .csv files only
+      </div>
+    </div>
+
+    <p id="status" class="status-text"></p>
+
+    <div class="btn-row">
+      <button class="btn btn-red" id="clearData">Clear Custom Data</button>
+    </div>
+  </div>
+
+  <!-- Application Tracker -->
+  <div class="section">
+    <div class="section-title">Application Tracker</div>
+    <div class="tracker-stats">
+      <div class="stat-card total">
+        <div class="stat-number" id="statTotal">--</div>
+        <div class="stat-label">Tracked</div>
+      </div>
+      <div class="stat-card applied">
+        <div class="stat-number" id="statApplied">--</div>
+        <div class="stat-label">Applied</div>
+      </div>
+      <div class="stat-card viewed">
+        <div class="stat-number" id="statViewed">--</div>
+        <div class="stat-label">Viewed</div>
+      </div>
+    </div>
+    <div class="btn-row" style="margin-top:0;">
+      <button class="btn btn-green" id="exportTracker">Export CSV</button>
+      <button class="btn btn-red" id="clearTracker">Clear History</button>
+    </div>
   </div>
 
   <script src="popup.js"></script>

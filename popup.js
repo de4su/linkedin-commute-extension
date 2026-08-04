@@ -6,49 +6,64 @@ const els = {
   status: document.getElementById("status"),
   homeCity: document.getElementById("homeCity"),
   saveHomeCity: document.getElementById("saveHomeCity"),
+  uploadZone: document.getElementById("uploadZone"),
 };
 
-// Check if there is a custom CSV uploaded and display status
+// -- Status helpers --
+function setStatus(msg, type) {
+  els.status.textContent = msg;
+  els.status.className = "status-text" + (type ? " " + type : "");
+}
+
+// -- Check if there is a custom CSV uploaded and display status --
 async function checkCustomData() {
   const { customDb, homeCity } = await browserAPI.storage.local.get(["customDb", "homeCity"]);
   
-  if (homeCity) {
-    els.homeCity.value = homeCity;
-  } else {
-    els.homeCity.value = "Rotterdam";
-  }
+  els.homeCity.value = homeCity || "Rotterdam";
   
   if (customDb) {
-    els.status.textContent = `Loaded custom data: ${Object.keys(customDb).length} locations.`;
-    els.status.style.color = "#057642";
+    setStatus("Custom data loaded: " + Object.keys(customDb).length + " locations.", "success");
   } else {
-    els.status.textContent = "Using default database.";
-    els.status.style.color = "#5e5e5e";
+    setStatus("Using default database.", "");
   }
 }
 checkCustomData();
 
+// -- Drag and drop --
+const uploadZone = els.uploadZone;
+uploadZone.addEventListener("dragover", (e) => { e.preventDefault(); uploadZone.classList.add("dragover"); });
+uploadZone.addEventListener("dragleave", () => uploadZone.classList.remove("dragover"));
+uploadZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  uploadZone.classList.remove("dragover");
+  const file = e.dataTransfer.files[0];
+  if (file && file.name.endsWith(".csv")) {
+    handleCSVFile(file);
+  } else {
+    setStatus("Please drop a .csv file.", "error");
+  }
+});
+
+// -- Home city --
 els.saveHomeCity.addEventListener("click", async () => {
-  await browserAPI.storage.local.set({ homeCity: els.homeCity.value.trim() });
-  els.status.textContent = "Home city saved!";
-  els.status.style.color = "#057642";
+  const city = els.homeCity.value.trim();
+  if (!city) { setStatus("Enter a city name.", "error"); return; }
+  await browserAPI.storage.local.set({ homeCity: city });
+  setStatus("Home city saved!", "success");
   setTimeout(() => checkCustomData(), 2000);
 });
 
+// -- Clear data --
 els.clearData.addEventListener("click", async () => {
   await browserAPI.storage.local.remove(["customDb"]);
-  els.status.textContent = "Custom data cleared.";
-  els.status.style.color = "#5e5e5e";
   els.csvFile.value = "";
+  setStatus("Custom data cleared.", "");
   checkCustomData();
 });
 
-els.csvFile.addEventListener("change", async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  
-  els.status.textContent = "Parsing CSV...";
-  els.status.style.color = "#0a66c2";
+// -- CSV parsing --
+function handleCSVFile(file) {
+  setStatus("Parsing CSV...", "");
   
   const reader = new FileReader();
   reader.onload = async (evt) => {
@@ -62,7 +77,7 @@ els.csvFile.addEventListener("change", async (e) => {
       const timeIdx = headers.indexOf("Travel_Time");
       
       if (destIdx === -1 || timeIdx === -1) {
-        throw new Error("CSV must contain 'Destination' and 'Travel_Time' columns.");
+        throw new Error("CSV must have 'Destination' and 'Travel_Time' columns. Click the ? icon for the expected format.");
       }
       
       const db = {};
@@ -82,10 +97,10 @@ els.csvFile.addEventListener("change", async (e) => {
         
         let originIdx = headers.indexOf("Origin");
         if (originIdx !== -1 && values.length > originIdx && !autoOrigin) {
-            let oStr = values[originIdx];
-            oStr = oStr.toLowerCase().replace(/netherlands/g, '').replace(/on-site/g, '').trim();
-            oStr = oStr.split(",")[0].trim().replace(/\s+/g, '-');
-            autoOrigin = oStr;
+          let oStr = values[originIdx];
+          oStr = oStr.toLowerCase().replace(/netherlands/g, '').replace(/on-site/g, '').trim();
+          oStr = oStr.split(",")[0].trim().replace(/\s+/g, '-');
+          autoOrigin = oStr;
         }
 
         if (values.length > Math.max(destIdx, timeIdx)) {
@@ -100,43 +115,47 @@ els.csvFile.addEventListener("change", async (e) => {
         }
       }
       
-      
       const entryCount = Object.keys(db).length;
       if (entryCount === 0) throw new Error("No valid data found in CSV.");
       
       const toSet = { customDb: db };
       if (autoOrigin) {
-          toSet.homeCity = autoOrigin;
-          els.homeCity.value = autoOrigin;
+        toSet.homeCity = autoOrigin;
+        els.homeCity.value = autoOrigin;
       }
       
       await browserAPI.storage.local.set(toSet);
-      els.status.textContent = `Success! Loaded ${entryCount} locations.`;
-      els.status.style.color = "#057642";
+      setStatus("Loaded " + entryCount + " locations.", "success");
     } catch (err) {
-      els.status.textContent = `Error: ${err.message}`;
-      els.status.style.color = "#d93025";
+      setStatus(err.message, "error");
     }
   };
   reader.readAsText(file);
+}
+
+els.csvFile.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (file) handleCSVFile(file);
 });
 
 // -- Application Tracker UI --
 
-const trackerStatusEl = document.getElementById("trackerStatus");
+const statTotal = document.getElementById("statTotal");
+const statApplied = document.getElementById("statApplied");
+const statViewed = document.getElementById("statViewed");
 const exportBtn = document.getElementById("exportTracker");
 const clearTrackerBtn = document.getElementById("clearTracker");
 
 async function updateTrackerStatus() {
   const { jobTracker = {} } = await browserAPI.storage.local.get("jobTracker");
-  const count = Object.keys(jobTracker).length;
-  const applied = Object.values(jobTracker).filter(e => e.appliedDate).length;
-  const viewed = Object.values(jobTracker).filter(e => e.viewedDate && !e.appliedDate).length;
-  if (count === 0) {
-    trackerStatusEl.textContent = "No jobs tracked yet.";
-  } else {
-    trackerStatusEl.textContent = `${count} jobs tracked (${applied} applied, ${viewed} viewed only).`;
-  }
+  const entries = Object.values(jobTracker);
+  const total = entries.length;
+  const applied = entries.filter(e => e.appliedDate).length;
+  const viewed = entries.filter(e => e.viewedDate && !e.appliedDate).length;
+  
+  statTotal.textContent = total;
+  statApplied.textContent = applied;
+  statViewed.textContent = viewed;
 }
 updateTrackerStatus();
 
@@ -144,7 +163,7 @@ exportBtn.addEventListener("click", async () => {
   const { jobTracker = {} } = await browserAPI.storage.local.get("jobTracker");
   const entries = Object.values(jobTracker);
   if (entries.length === 0) {
-    trackerStatusEl.textContent = "Nothing to export.";
+    setStatus("Nothing to export.", "");
     return;
   }
   
@@ -161,13 +180,12 @@ exportBtn.addEventListener("click", async () => {
   a.download = "linkedin_applications.csv";
   a.click();
   URL.revokeObjectURL(url);
-  trackerStatusEl.textContent = "Exported!";
-  trackerStatusEl.style.color = "#057642";
+  setStatus("Exported!", "success");
 });
 
 clearTrackerBtn.addEventListener("click", async () => {
   if (!confirm("Clear all tracked application dates? This cannot be undone.")) return;
   await browserAPI.storage.local.remove("jobTracker");
-  trackerStatusEl.textContent = "History cleared.";
-  trackerStatusEl.style.color = "#5e5e5e";
+  setStatus("History cleared.", "");
+  updateTrackerStatus();
 });
